@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Component, inject } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 
 @Component({
@@ -14,6 +15,14 @@ import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } 
 })
 export class CadastrarTarefas {
 
+    private http = inject(HttpClient);
+
+    ngOnInit() {
+      this.http.get('http://localhost:8081/api/v1/categorias')
+        .subscribe((response) => {
+          console.table(response);
+        });
+  }
 
 
   formCadastro = new FormGroup({
